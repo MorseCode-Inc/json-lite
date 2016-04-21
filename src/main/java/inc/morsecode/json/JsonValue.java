@@ -6,7 +6,6 @@ package inc.morsecode.json;
  * &copy; MorseCode Incorporated 2015<br/>
  * =--------------------------------=<br/><pre>
  * Created: Aug 21, 2015
- * Project: uim-probe-kit
  *
  * Description:
  * JSON Value
@@ -14,6 +13,8 @@ package inc.morsecode.json;
  * =--------------------------------=
  */
 public abstract class JsonValue {
+	
+	public static final String NULL= "null";
 	
 	private Object value;
 	
@@ -29,12 +30,11 @@ public abstract class JsonValue {
 		
 		Object value= getValue();
 		
-		if (value == null) { return "null"; }
+		if (value == null) { return NULL; }
 		
 		if (value instanceof String) { return "\""+ JsonParser.escape((String)(value.toString())) +"\""; }
 		
 		return value.toString();
 	}
-	
 
 }
