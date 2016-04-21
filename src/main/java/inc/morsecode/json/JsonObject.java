@@ -12,39 +12,6 @@ public class JsonObject extends JsonValue {
 		data= new HashMap<String, JsonMember>();
 	}
 	
-	/*
-	public JsonObject(XmlTag xml) {
-		this();
-		
-		if (!xml.getAttributes().isEmpty()) {
-			JsonObject attributes= new JsonObject();
-			for (String attribute : xml.getAttributes()) {
-				String value= xml.getAttribute(attribute);
-				attributes.set(attribute, JsonParser.toValue(value));
-			}
-			set("attributes", attributes);
-		}
-		
-		String value= xml.getValue();
-		if (value != null) {
-			set("value", JsonParser.toValue(value));
-		}
-		
-		set("name", xml.getName());
-		
-		if (xml.getChildren().length() > 0) {
-			JsonArray children= new JsonArray();
-			for (XmlTag tag : xml.getChildren()) {
-				JsonObject child= new JsonObject(tag);
-				child.set("name", tag.getName());
-				children.add(child);
-			}
-			set("tags", children);
-		}
-		
-	}
-	*/
-	
 	@Override
 	public Object getValue() { return this; }
 
@@ -87,7 +54,6 @@ public class JsonObject extends JsonValue {
 	 * @throws ClassCastException if the actual value exists, but is not the proper data type
 	 */
 	public double get(String name, double ifNull) {
-		// Double value= null;
 		Object value= get(name, (Object)null);
 		if (value == null) { return ifNull; }
 		
