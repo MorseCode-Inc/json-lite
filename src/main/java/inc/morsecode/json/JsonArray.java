@@ -17,6 +17,7 @@ public class JsonArray extends JsonValue implements Iterable<JsonValue> {
 		return getArray().iterator();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<JsonValue> getArray() {
 		return (ArrayList<JsonValue>)getValue();
 	}
