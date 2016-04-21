@@ -3,7 +3,7 @@ package inc.morsecode.json;
 import inc.morsecode.json.JsonObject;
 
 import inc.morsecode.json.ex.MalformedJsonException;
-import inc.morsecode.kits.JsonParser;
+import inc.morsecode.json.JsonParser;
 import org.junit.Test;
 import org.junit.Assert;
 
