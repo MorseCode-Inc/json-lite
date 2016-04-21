@@ -26,6 +26,9 @@ public class JsonArray extends JsonValue implements Iterable<JsonValue> {
 		if (getValue() == null) {
 			setValue(new ArrayList<JsonValue>());
 		}
+		if (e == null) {
+			e= new JsonValue() {};
+		}
 		getArray().add(e);
 	}
 	
