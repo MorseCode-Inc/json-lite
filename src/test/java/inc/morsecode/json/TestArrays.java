@@ -2,8 +2,23 @@ package inc.morsecode.json;
 
 import org.junit.Test;
 import org.junit.Assert;
+import static org.mockito.Mockito.*;
 
 public class TestArrays {
+
+	
+	@Test
+	public void testLazyLoad() {
+		JsonArray array= new JsonArray(null);
+		array.add(5);
+		Assert.assertTrue((Integer)array.get(0).getValue() == 5);
+	}
+	
+	@Test
+	public void testEmpty() {
+		JsonArray array= new JsonArray();
+		Assert.assertTrue(array.isEmpty());
+	}
 
 	@Test
 	public void testArray() {
@@ -28,6 +43,33 @@ public class TestArrays {
 		Assert.assertTrue(array.get(5).getValue() == null);
 	}
 
+	@Test
+	public void testIterator() {
+		JsonArray array= new JsonArray();
+		
+		for (int i= 0; i < 5; i++) {
+			array.add(i);
+		}
+		
+		int i= 0;
+		for (JsonValue value : array) {
+			Assert.assertEquals((int)value.getValue(), i++);
+		}
+	}
 	
+	@Test
+	public void testRemove() {
+		JsonArray array= new JsonArray();
+		
+		for (int i= 10; i < 15; i++) {
+			array.add(i);
+		}
+		
+		JsonValue value= array.remove(3);
+		
+		Assert.assertEquals(13, (int)value.getValue());
 
+	}
+
+	
 }

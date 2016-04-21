@@ -218,17 +218,6 @@ public class JsonParser {
 		}
 	}
 	
-	/*
-	private String peek() throws MalformedJsonException {
-		try {
-			String token= tokens.get(0);
-			return token;
-		} catch (IndexOutOfBoundsException oobx) {
-			throw new MalformedJsonException("Unexpected EOF at line "+ lineNo +","+ charNo, oobx);
-		}
-	}
-	*/
-	
 	private char peek() throws MalformedJsonException {
 		try {
 			String token= tokens.get(0).trim();
@@ -292,34 +281,25 @@ public class JsonParser {
 				}
 			}
 			
-		
 			return text.toString();
 		} catch (MalformedJsonException x) {
 			throw x;
-			// throw new MalformedJsonException("Missing end quote for string '"+ text +"' near line "+ lineNo +","+ charNo, x);
 		}
 	}
 
 	private JsonValue nextValue(String name) throws MalformedJsonException {
 		char c= peek();
-		// System.out.println(" NEXT_VAL("+ name +")");		
-		if (c == '"') { // "\"".equals(token)) {
-			//System.out.println("Getting next String value.");
+		if (c == '"') { 
 			return new JsonPrimitive(nextString());
-		} else if (c == '{') { // "{".equals(token)) {
-			//System.out.println("Getting next Object value.");
+		} else if (c == '{') { 
 			JsonObject value= parseObject();
 			return value;
-		} else if (c == '[') { // "[".equals(token)) {
-			//System.out.println("Getting next Array value.");
+		} else if (c == '[') { 
 			return nextArray();
 		} else if (c == ' ' || c == '\t' || c == '\r' || c == '\n') { // white space
 		}
 		
 		return toValue(next());
-		
-		//throw new MalformedJsonException("Missing value for '"+ name +"' at line "+ lineNo +","+ charNo);
-		// return token;
 	}
 	
 	
@@ -329,15 +309,17 @@ public class JsonParser {
 			throw new MalformedJsonException("Expecting array value, missing [");	// pop beginning bracket
 		}
 		
-		while (']' != peek()) {
+		char peek = peek();
+
+		while (']' != peek) {
 			
-			if ('[' == peek()) {
+			if ('[' == peek) {
 				// multi-dimensional array
 				JsonArray dimension= nextArray();
 				array.add(dimension);
-			} else if ('{' == peek()) {
+			} else if ('{' == peek) {
 				array.add(parseObject());
-			} else if (',' == peek()) {
+			} else if (',' == peek) {
 				next(); // pop the comma off
 			} else {
 				array.add(nextValue("array["+ array.size() +"]"));
@@ -345,8 +327,10 @@ public class JsonParser {
 			
 		}
 		
-		// pop the last ] off of the thing
-		System.out.println(">> "+ next());
+		// pop the last ] 
+		if (!"]".equals(next())) {
+			throw new MalformedJsonException("Expecting array value, missing terminating ]");
+		}
 		
 		return array;
 	}

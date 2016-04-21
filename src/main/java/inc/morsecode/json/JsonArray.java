@@ -10,7 +10,7 @@ public class JsonArray extends JsonValue implements Iterable<JsonValue> {
 	}
 	
 	public JsonArray(ArrayList<JsonValue> array) {
-		super(array);
+		super(array == null ? new ArrayList<JsonValue>() : array);
 	}
 
 	public Iterator<JsonValue> iterator() {
@@ -23,9 +23,6 @@ public class JsonArray extends JsonValue implements Iterable<JsonValue> {
 	}
 	
 	public void add(JsonValue e) {
-		if (getValue() == null) {
-			setValue(new ArrayList<JsonValue>());
-		}
 		if (e == null) {
 			e= new JsonValue() {};
 		}

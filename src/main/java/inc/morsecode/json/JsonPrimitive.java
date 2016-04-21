@@ -2,10 +2,6 @@ package inc.morsecode.json;
 
 public class JsonPrimitive extends JsonValue {
 
-	public JsonPrimitive() {
-		super();
-	}
-
 	public JsonPrimitive(String value) { super(value); }
 	public JsonPrimitive(Integer value) { super(value); }
 	public JsonPrimitive(Long value) { super(value); }
