@@ -1,5 +1,6 @@
 /pom.xml.releaseBackup
 /release.properties
+/target/checkout
 /target/classes
 /target/test-classes
 /target/*.jar
