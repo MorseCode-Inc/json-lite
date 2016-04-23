@@ -61,7 +61,7 @@ public class TestArrays {
 		
 		int i= 0;
 		for (JsonValue value : array) {
-			Assert.assertEquals((int)value.getValue(), i++);
+			Assert.assertEquals(i++, ((Integer)value.getValue()).intValue());
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class TestArrays {
 		
 		JsonValue value= array.remove(3);
 		
-		Assert.assertEquals(13, (int)value.getValue());
+		Assert.assertEquals(13, ((Integer)value.getValue()).intValue());
 
 	}
 
