@@ -50,13 +50,25 @@
     <repository>
       <id>morsecode</id>
       <name>MorseCode</name>
-      <url>scpexe://maven@maven.home:repo</url>
+      <url>scpexe://maven@maven.home:/mirror/maven/repo</url>
     </repository>
     <snapshotRepository>
       <id>morsecode</id>
       <name>MorseCode</name>
-      <url>scpexe://maven@maven.home:snapshots</url>
+      <url>scpexe://maven@maven.home:/mirror/maven/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
+  
+    
+  <build>
+    <extensions>
+      <!-- Enabling the use of SSH -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+         <artifactId>wagon-ssh-external</artifactId>
+         <version>1.0-beta-6</version>
+      </extension>
+    </extensions>
+  </build>
   
 </project>
