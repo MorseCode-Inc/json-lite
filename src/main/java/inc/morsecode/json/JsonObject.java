@@ -50,6 +50,7 @@ public class JsonObject extends JsonValue {
 	/**
 	 * Get a numeric(double) value from this JSON Object by name
 	 * @param name - the name of the attribute to get
+	 * @param ifNull - value to return if the key does not exist
 	 * @return the numeric value
 	 * @throws ClassCastException if the actual value exists, but is not the proper data type
 	 */
