@@ -2,3 +2,7 @@
 /release.properties
 /target/classes
 /target/test-classes
+/target/*.jar
+/target/maven-archiver
+/target/maven-status
+/target/surefire-reports
