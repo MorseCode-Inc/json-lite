@@ -19,30 +19,28 @@ public class JsonMember {
 		this.value= value;
 	}
 	
-	public String getName() {
-		return name;
-	}
+	public String getName() { return name; }
+	public JsonMember setName(String name) { this.name = name; return this; }
 	
 	public Object getValue() {
+		if (value == null) { return null; }
 		return value.getValue();
 	}
 	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public void setValue(String value) { this.value= new JsonPrimitive(value); }
-	public void setValue(Integer value) { this.value= new JsonPrimitive(value); }
-	public void setValue(Long value) { this.value= new JsonPrimitive(value); }
-	public void setValue(Double value) { this.value= new JsonPrimitive(value); }
-	public void setValue(Boolean value) { this.value= new JsonPrimitive(value); }
-	public void setValue(ArrayList<JsonValue> value) { this.value= new JsonArray(value); }
+	public JsonMember setValue(JsonValue value) { this.value= value; return this; }
+	public JsonMember setValue(String value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonMember setValue(Integer value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonMember setValue(Long value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonMember setValue(Double value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonMember setValue(Boolean value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonMember setValue(ArrayList<JsonValue> value) { this.value= new JsonArray(value); return this; }
 
 	@Override
 	public String toString() {
 		String str= "\""+ JsonParser.escape(getName()) +"\":"+ getJsonValue();
 		return str;
 	}
+
 	public JsonValue getJsonValue() {
 		return value;
 	}

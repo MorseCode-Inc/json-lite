@@ -1,6 +1,8 @@
 package inc.morsecode.json;
 
 import java.util.ArrayList;
+
+import java.util.Collection;
 import java.util.Iterator;
 
 public class JsonArray extends JsonValue implements Iterable<JsonValue> {
@@ -9,8 +11,34 @@ public class JsonArray extends JsonValue implements Iterable<JsonValue> {
 		super(new ArrayList<JsonValue>());
 	}
 	
-	public JsonArray(ArrayList<JsonValue> array) {
-		super(array == null ? new ArrayList<JsonValue>() : array);
+	public JsonArray(Collection<JsonValue> array) {
+		this();
+		for (JsonValue value : array) { add(value); }
+	}
+
+	public JsonArray(int[] array) {
+		this();
+		for (int value : array) { add(value); }
+	}
+
+	public JsonArray(long[] array) {
+		this();
+		for (long value : array) { add(value); }
+	}
+
+	public JsonArray(double[] array) {
+		this();
+		for (double value : array) { add(value); }
+	}
+
+	public JsonArray(boolean[] array) {
+		this();
+		for (boolean value : array) { add(value); }
+	}
+
+	public JsonArray(String[] array) {
+		this();
+		for (String value : array) { add(value); }
 	}
 
 	public Iterator<JsonValue> iterator() {

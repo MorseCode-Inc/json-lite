@@ -9,7 +9,7 @@ public class TestArrays {
 	
 	@Test
 	public void testLazyLoad() {
-		JsonArray array= new JsonArray(null);
+		JsonArray array= new JsonArray();
 		array.add(5);
 		Assert.assertTrue((Integer)array.get(0).getValue() == 5);
 	}
@@ -17,6 +17,14 @@ public class TestArrays {
 	@Test
 	public void testEmpty() {
 		JsonArray array= new JsonArray();
+		Assert.assertTrue(array.isEmpty());
+		
+		array.add(System.currentTimeMillis());
+
+		Assert.assertFalse(array.isEmpty());
+
+		array.remove(0);
+		
 		Assert.assertTrue(array.isEmpty());
 	}
 

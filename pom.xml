@@ -8,7 +8,8 @@
   <packaging>jar</packaging>
 
   <name>json-lite</name>
-  <url>http://maven.apache.org</url>
+  <description>Simple, light weight JSON library for Java</description>
+  <url>http://maven.home</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,4 +34,29 @@
   	<connection>scm:git:ssh://git@github.com/MorseCode-Inc/json-lite.git</connection>
   	<developerConnection>scm:git:ssh://git@github.com/MorseCode-Inc/json-lite.git</developerConnection>
   </scm>
+  <organization>
+  	<name>MorseCode Incorporated</name>
+  </organization>
+  
+  <repositories>
+    <repository>
+      <id>morsecode</id>
+      <name>MorseCode</name>
+      <url>http://maven.home/</url>
+    </repository>
+  </repositories>
+  
+  <distributionManagement>
+    <repository>
+      <id>morsecode</id>
+      <name>MorseCode</name>
+      <url>scpexe://maven@maven.home:repo</url>
+    </repository>
+    <snapshotRepository>
+      <id>morsecode</id>
+      <name>MorseCode</name>
+      <url>scpexe://maven@maven.home:snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  
 </project>

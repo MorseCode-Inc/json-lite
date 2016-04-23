@@ -30,11 +30,15 @@ public abstract class JsonValue {
 		
 		Object value= getValue();
 		
-		if (value == null) { return NULL; }
+		if (value == null) { return quoted(NULL); }
 		
-		if (value instanceof String) { return "\""+ JsonParser.escape((String)(value.toString())) +"\""; }
+		if (value instanceof String) { return quoted(JsonParser.escape(value.toString())); }
 		
 		return value.toString();
 	}
-
+	
+	private String quoted(String value) {
+		return "\""+ value +"\"";
+	}
+	
 }
