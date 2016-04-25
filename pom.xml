@@ -3,7 +3,7 @@
 
   <groupId>inc.morsecode</groupId>
   <artifactId>json-lite</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.7-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>json-lite</name>
@@ -44,6 +44,11 @@
       <name>MorseCode</name>
       <url>http://maven.home/</url>
     </repository>
+    <repository>
+      <id>morsecode-snapshots</id>
+      <name>MorseCode Snapshots</name>
+      <url>http://maven.home/snapshots</url>
+    </repository>
   </repositories>
   
   <distributionManagement>
@@ -55,11 +60,10 @@
     <snapshotRepository>
       <id>morsecode</id>
       <name>MorseCode</name>
-      <url>scpexe://maven@maven.home:/mirror/maven/snapshots</url>
+      <url>scpexe://maven@maven.home:/mirror/maven/repo/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
   
-    
   <build>
     <extensions>
       <!-- Enabling the use of SSH -->
@@ -69,6 +73,6 @@
          <version>1.0-beta-6</version>
       </extension>
     </extensions>
-  </build>
+  </build>    
   
 </project>
