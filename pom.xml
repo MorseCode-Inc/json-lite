@@ -44,11 +44,6 @@
       <name>MorseCode</name>
       <url>http://maven.home/</url>
     </repository>
-    <repository>
-      <id>morsecode-snapshots</id>
-      <name>MorseCode Snapshots</name>
-      <url>http://maven.home/snapshots</url>
-    </repository>
   </repositories>
   
   <distributionManagement>
@@ -57,11 +52,6 @@
       <name>MorseCode</name>
       <url>scpexe://maven@maven.home:/mirror/maven/repo</url>
     </repository>
-    <snapshotRepository>
-      <id>morsecode</id>
-      <name>MorseCode</name>
-      <url>scpexe://maven@maven.home:/mirror/maven/repo/snapshots</url>
-    </snapshotRepository>
   </distributionManagement>
   
   <build>
