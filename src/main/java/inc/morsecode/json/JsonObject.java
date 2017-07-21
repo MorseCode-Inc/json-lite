@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class JsonObject extends JsonValue {
 
@@ -214,12 +215,15 @@ public class JsonObject extends JsonValue {
 
 	@Override
 	public String toString() {
-		StringBuffer buff= new StringBuffer();
+		StringBuffer buff= new StringBuffer("{");
 
-	    data.values()
-				.stream()
-				.map( value -> buff.append(value.toString()))
-		;
+		String comma= "";
+	    for (JsonMember value : data.values()) {
+	    	buff.append(comma).append(value.toString());
+	    	comma= ",";
+		}
+
+	    buff.append("}");
 
 	    return buff.toString();
 	}
