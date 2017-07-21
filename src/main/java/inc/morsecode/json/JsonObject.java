@@ -236,8 +236,14 @@ public class JsonObject extends JsonValue {
 		return Collections.unmodifiableMap(data);
 	}
 
-	public void set(String key, Map<String, Object> map) {
+	public JsonObject set(String key, Map<String, Object> map) {
 	    set(key, ValueFactory.create(map));
+	    return this;
+	}
+
+	public JsonObject merge(Map<String, Object> map) {
+	    map.keySet().forEach(key -> set(key, ValueFactory.create(map.get(key))));
+	    return this;
 	}
 
 }

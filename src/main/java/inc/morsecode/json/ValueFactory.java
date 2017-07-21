@@ -38,8 +38,7 @@ public class ValueFactory {
 
             final JsonObject retVal= new JsonObject();
 
-            map.keySet().stream().forEach(key -> create(map.get(key)));
-
+            map.keySet().stream().forEach(key -> retVal.set(key, create(map.get(key))));
 
             return retVal;
 
