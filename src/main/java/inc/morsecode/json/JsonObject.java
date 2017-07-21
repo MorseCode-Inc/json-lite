@@ -2,7 +2,9 @@ package inc.morsecode.json;
 
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class JsonObject extends JsonValue {
 
@@ -210,8 +212,28 @@ public class JsonObject extends JsonValue {
 		
 	}
 
+	@Override
+	public String toString() {
+		StringBuffer buff= new StringBuffer();
+
+	    data.values()
+				.stream()
+				.map( value -> buff.append(value.toString()))
+		;
+
+	    return buff.toString();
+	}
+
 	public Collection<String> keys() {
 		return data.keySet();
+	}
+
+	public Map<String, JsonMember> getData() {
+		return Collections.unmodifiableMap(data);
+	}
+
+	public void set(String key, Map<String, Object> map) {
+	    set(key, ValueFactory.create(map));
 	}
 
 }
