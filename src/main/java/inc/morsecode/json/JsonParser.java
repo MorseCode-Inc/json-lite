@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import inc.morsecode.json.ex.MalformedJsonException;
-import inc.morsecode.spec.json.JsonElement;
 import inc.morsecode.spec.json.JsonStructure;
 
 public class JsonParser {
@@ -305,8 +304,8 @@ public class JsonParser {
 	}
 	
 	
-	private JsonArray nextArray() throws MalformedJsonException {
-		JsonArray array= new JsonArray();
+	private TypedJsonArray nextArray() throws MalformedJsonException {
+		TypedJsonArray array= new TypedJsonArray();
 		if (!"[".equals(next())) {
 			throw new MalformedJsonException("Expecting array value, missing [");	// pop beginning bracket
 		}
@@ -317,7 +316,7 @@ public class JsonParser {
 			
 			if ('[' == peek) {
 				// multi-dimensional array
-				JsonArray dimension= nextArray();
+				TypedJsonArray dimension= nextArray();
 				array.add(dimension);
 			} else if ('{' == peek) {
 				array.add((JsonStructure)parseObject());
@@ -381,7 +380,7 @@ public class JsonParser {
 		
 		JsonStructure json= new JsonObject();
 		JsonStructure address= new JsonObject();
-		JsonArray array= new JsonArray();
+		TypedJsonArray array= new TypedJsonArray();
 		json.set("name", (Integer)null);
 		json.set("age", 31);
 		address.set("street", "123 Main St.");

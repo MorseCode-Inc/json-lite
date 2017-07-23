@@ -30,7 +30,7 @@ public class JsonObject implements JsonElement, JsonStructure {
 	@Override
 	public JsonStructure set(String name, JsonStructure value) { set(new JsonMember(name, value)); return this; }
 	@Override
-	public JsonStructure set(String name, JsonArray value) { set(new JsonMember(name, value)); return this; }
+	public JsonStructure set(String name, TypedJsonArray value) { set(new JsonMember(name, value)); return this; }
 	@Override
 	public JsonStructure set(String name, JsonElement value) { set(new JsonMember(name, value)); return this; }
 	
@@ -213,7 +213,7 @@ public class JsonObject implements JsonElement, JsonStructure {
 	*/
 
 	@Override
-	public JsonArray get(String key, JsonArray ifNull) {
+	public TypedJsonArray get(String key, TypedJsonArray ifNull) {
 		
 		JsonItem member= data.get(key);
 		
@@ -221,9 +221,9 @@ public class JsonObject implements JsonElement, JsonStructure {
 			return ifNull;
 		}
 		
-		if (member.getElement() instanceof JsonArray) {
+		if (member.getElement() instanceof TypedJsonArray) {
 			
-			return (JsonArray)member.getElement();
+			return (TypedJsonArray)member.getElement();
 		}
 		
 		return ifNull;

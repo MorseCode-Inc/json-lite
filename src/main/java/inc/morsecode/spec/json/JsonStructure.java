@@ -1,7 +1,6 @@
 package inc.morsecode.spec.json;
 
-import inc.morsecode.json.JsonArray;
-import inc.morsecode.json.JsonValue;
+import inc.morsecode.json.TypedJsonArray;
 
 import java.util.Collection;
 import java.util.Map;
@@ -24,7 +23,7 @@ public interface JsonStructure extends JsonElement, JsonItem {
 
     JsonStructure set(String name, JsonStructure value);
 
-    JsonStructure set(String name, JsonArray value);
+    JsonStructure set(String name, TypedJsonArray value);
 
     JsonStructure set(String name, JsonElement value);
 
@@ -50,7 +49,7 @@ public interface JsonStructure extends JsonElement, JsonItem {
 
     JsonStructure getObject(String name, JsonStructure ifNull);
 
-    JsonArray get(String key, JsonArray ifNull);
+    TypedJsonArray get(String key, TypedJsonArray ifNull);
 
     Collection<String> keys();
 

@@ -8,19 +8,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class JsonArray<T extends JsonElement> implements JsonElement, Iterable<T>, List<T> {
+public class TypedJsonArray<T extends JsonElement> implements JsonElement, Iterable<T>, List<T> {
 
     private ArrayList<T> array= new ArrayList<T>();
 
     // default constructor
-    public JsonArray() { }
+    public TypedJsonArray() { }
 
     // construct from existing Collection of things
-	public JsonArray(Collection<T> array) {
+	public TypedJsonArray(Collection<T> array) {
 		for (T value : array) { add(value); }
 	}
 
-	public JsonArray(T[] array) {
+	public TypedJsonArray(T[] array) {
 		for (T value : array) { add(value); }
 	}
 

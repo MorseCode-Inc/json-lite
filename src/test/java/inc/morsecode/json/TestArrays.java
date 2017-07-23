@@ -2,21 +2,20 @@ package inc.morsecode.json;
 
 import org.junit.Test;
 import org.junit.Assert;
-import static org.mockito.Mockito.*;
 
 public class TestArrays {
 
 	
 	@Test
 	public void testLazyLoad() {
-		JsonArray<JsonPrimitive> array= new JsonArray();
-		array.add(new JsonPrimitive(5));
+		VariableTypedJsonArray array= new VariableTypedJsonArray();
+		array.add(5);
 		Assert.assertTrue((Integer)array.get(0).getValue() == 5);
 	}
 	
 	@Test
 	public void testEmpty() {
-		JsonArray array= new JsonArray();
+		VariableTypedJsonArray array= new VariableTypedJsonArray();
 		Assert.assertTrue(array.isEmpty());
 		
 		array.add(System.currentTimeMillis());
@@ -30,7 +29,7 @@ public class TestArrays {
 
 	@Test
 	public void testArray() {
-		JsonArray array= new JsonArray();
+		VariableTypedJsonArray array= new VariableTypedJsonArray();
 
 		long ts= System.currentTimeMillis();
 		
@@ -53,8 +52,8 @@ public class TestArrays {
 
 	@Test
 	public void testIterator() {
-		JsonArray array= new JsonArray();
-		
+		VariableTypedJsonArray array= new VariableTypedJsonArray();
+
 		for (int i= 0; i < 5; i++) {
 			array.add(i);
 		}
@@ -67,8 +66,8 @@ public class TestArrays {
 	
 	@Test
 	public void testRemove() {
-		JsonArray array= new JsonArray();
-		
+		VariableTypedJsonArray array= new VariableTypedJsonArray();
+
 		for (int i= 10; i < 15; i++) {
 			array.add(i);
 		}

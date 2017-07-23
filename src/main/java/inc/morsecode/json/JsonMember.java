@@ -17,7 +17,7 @@ public class JsonMember implements inc.morsecode.spec.json.JsonItem {
 	public JsonMember(String name, Double value) { this(name, new JsonPrimitive(value)); }
 	public JsonMember(String name, Boolean value) { this(name, new JsonPrimitive(value)); }
 
-	public JsonMember(String name, JsonArray value) {
+	public JsonMember(String name, TypedJsonArray value) {
 		this.name= name;
 		this.value= value;
 	}
@@ -51,7 +51,7 @@ public class JsonMember implements inc.morsecode.spec.json.JsonItem {
 	@Override
 	public JsonItem setValue(Boolean value) { this.value= new JsonPrimitive(value); return this; }
 	@Override
-	public JsonItem setValue(ArrayList<JsonValue> value) { this.value= new JsonArray(value); return this; }
+	public JsonItem setValue(ArrayList<JsonValue> value) { this.value= new TypedJsonArray(value); return this; }
 
 	@Override
 	public String toString() {
