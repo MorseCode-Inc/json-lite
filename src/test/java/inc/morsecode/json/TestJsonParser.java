@@ -1,9 +1,7 @@
 package inc.morsecode.json;
 
-import inc.morsecode.json.JsonObject;
-
 import inc.morsecode.json.ex.MalformedJsonException;
-import inc.morsecode.json.JsonParser;
+import inc.morsecode.spec.json.JsonStructure;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -17,7 +15,7 @@ public class TestJsonParser {
 	@Test
 	public void testParse() {
 		try {
-			JsonObject json= JsonParser.parse(SIMPLE);
+			JsonStructure json= JsonParser.parse(SIMPLE);
 			int x= json.get("x", 0);
 			Assert.assertEquals(43, x);
 		} catch (MalformedJsonException e) {

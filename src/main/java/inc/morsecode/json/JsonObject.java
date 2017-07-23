@@ -1,35 +1,41 @@
 package inc.morsecode.json;
 
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import inc.morsecode.spec.json.JsonElement;
+import inc.morsecode.spec.json.JsonItem;
+import inc.morsecode.spec.json.JsonStructure;
 
-public class JsonObject extends JsonValue {
+import java.util.*;
 
-	HashMap<String, JsonMember> data;
-	
-	public JsonObject() {
-		data= new HashMap<String, JsonMember>();
-	}
-	
+public class JsonObject implements JsonElement, JsonStructure {
+
+	private HashMap<String, JsonItem> data= new HashMap<String, JsonItem>();
+
 	@Override
 	public Object getValue() { return this; }
 
-	public JsonObject set(String name, String value) { set(new JsonMember(name, value)); return this; }
-	public JsonObject set(String name, Integer value) { set(new JsonMember(name, value)); return this; }
-	public JsonObject set(String name, Long value) { set(new JsonMember(name, value)); return this; }
-	public JsonObject set(String name, Double value) { set(new JsonMember(name, value)); return this; }
-	public JsonObject set(String name, Boolean value) { set(new JsonMember(name, value)); return this; }
-	public JsonObject set(String name, Short value) { set(new JsonMember(name, (int)value)); return this; }
+	@Override
+	public JsonStructure set(String name, String value) { set(new JsonMember(name, value)); return this; }
+	@Override
+	public JsonStructure set(String name, Integer value) { set(new JsonMember(name, value)); return this; }
+	@Override
+	public JsonStructure set(String name, Long value) { set(new JsonMember(name, value)); return this; }
+	@Override
+	public JsonStructure set(String name, Double value) { set(new JsonMember(name, value)); return this; }
+	@Override
+	public JsonStructure set(String name, Boolean value) { set(new JsonMember(name, value)); return this; }
+	@Override
+	public JsonStructure set(String name, Short value) { set(new JsonMember(name, (int)value)); return this; }
 	
-	public JsonObject set(String name, JsonObject value) { set(new JsonMember(name, value)); return this; }
-	public JsonObject set(String name, JsonArray value) { set(new JsonMember(name, value)); return this; }
-	public JsonObject set(String name, JsonValue value) { set(new JsonMember(name, value)); return this; }
+	@Override
+	public JsonStructure set(String name, JsonStructure value) { set(new JsonMember(name, value)); return this; }
+	@Override
+	public JsonStructure set(String name, JsonArray value) { set(new JsonMember(name, value)); return this; }
+	@Override
+	public JsonStructure set(String name, JsonElement value) { set(new JsonMember(name, value)); return this; }
 	
-	public JsonObject set(JsonMember member) {
+	@Override
+	public JsonStructure set(JsonItem member) {
 		data.put(member.getName(), member);
 		return this;
 	}
@@ -41,6 +47,7 @@ public class JsonObject extends JsonValue {
 	 * @param name - the name of the attribute to get
 	 * @return A String representation of the value
 	 */
+	@Override
 	public String get(String name) {
 		Object value= (Object)get(name, (Object)null);
 		if (value == null) { return null; }
@@ -57,6 +64,7 @@ public class JsonObject extends JsonValue {
 	 * @return the numeric value
 	 * @throws ClassCastException if the actual value exists, but is not the proper data type
 	 */
+	@Override
 	public double get(String name, double ifNull) {
 		Object value= get(name, (Object)null);
 		if (value == null) { return ifNull; }
@@ -74,6 +82,7 @@ public class JsonObject extends JsonValue {
 		return (Double)value;
 	}
 	
+	@Override
 	public boolean get(String name, boolean ifNull) {
 		try {
 			Boolean value= (Boolean)get(name, (Object)null);
@@ -90,6 +99,7 @@ public class JsonObject extends JsonValue {
 		}
 	}
 	
+	@Override
 	public long get(String name, long ifNull) {
 		Object o= get(name, (Object)null);
 		
@@ -105,6 +115,7 @@ public class JsonObject extends JsonValue {
 		
 	}
 	
+	@Override
 	public int get(String name, int ifNull) {
 		try {
 			Integer value= (Integer)get(name, (Object)null);
@@ -127,6 +138,7 @@ public class JsonObject extends JsonValue {
 	}
 	
 	
+	@Override
 	public short get(String name, short ifNull) {
 		Integer value= (Integer)get(name, (Object)null);
 		
@@ -137,6 +149,7 @@ public class JsonObject extends JsonValue {
 		return (short)value.intValue();
 	}
 	
+	@Override
 	public String get(String name, String ifNull) {
 		Object value= get(name, (Object)null);
 		
@@ -145,8 +158,9 @@ public class JsonObject extends JsonValue {
 		return value.toString();
 	}
 	
+	@Override
 	public Object get(String name, Object ifNull) {
-		JsonMember member= data.get(name);
+		JsonItem member= data.get(name);
 		if (member == null) { return ifNull; }
 		
 		Object value= member.getValue();
@@ -155,13 +169,15 @@ public class JsonObject extends JsonValue {
 		return value;
 	}
 
-	public JsonObject getObject(String name) {
-		JsonObject value= getObject(name, (JsonObject)null);
+	@Override
+	public JsonStructure getObject(String name) {
+		JsonStructure value= getObject(name, (JsonStructure)null);
 		return value;
 	}
 	
-	public JsonObject getObject(String name, JsonObject ifNull) {
-		JsonObject value= (JsonObject)get(name, (Object)null);
+	@Override
+	public JsonStructure getObject(String name, JsonStructure ifNull) {
+		JsonStructure value= (JsonStructure)get(name, (Object)null);
 		
 		if (value == null) {
 			return ifNull;
@@ -196,17 +212,18 @@ public class JsonObject extends JsonValue {
 	}
 	*/
 
+	@Override
 	public JsonArray get(String key, JsonArray ifNull) {
 		
-		JsonMember member= data.get(key);
+		JsonItem member= data.get(key);
 		
 		if (member == null) { 
 			return ifNull;
 		}
 		
-		if (member.getJsonValue() instanceof JsonArray) {
+		if (member.getElement() instanceof JsonArray) {
 			
-			return (JsonArray)member.getJsonValue();
+			return (JsonArray)member.getElement();
 		}
 		
 		return ifNull;
@@ -218,7 +235,7 @@ public class JsonObject extends JsonValue {
 		StringBuffer buff= new StringBuffer("{");
 
 		String comma= "";
-	    for (JsonMember value : data.values()) {
+	    for (JsonItem value : data.values()) {
 	    	buff.append(comma).append(value.toString());
 	    	comma= ",";
 		}
@@ -228,22 +245,40 @@ public class JsonObject extends JsonValue {
 	    return buff.toString();
 	}
 
+	@Override
 	public Collection<String> keys() {
 		return data.keySet();
 	}
 
-	public Map<String, JsonMember> getData() {
+	@Override
+	public Map<String, JsonItem> getData() {
 		return Collections.unmodifiableMap(data);
 	}
 
-	public JsonObject set(String key, Map<String, Object> map) {
+	@Override
+	public JsonStructure set(String key, Map<String, Object> map) {
 	    set(key, ValueFactory.create(map));
 	    return this;
 	}
 
-	public JsonObject merge(Map<String, Object> map) {
+	@Override
+	public JsonStructure merge(Map<String, Object> map) {
 	    map.keySet().forEach(key -> set(key, ValueFactory.create(map.get(key))));
 	    return this;
 	}
 
+
+	// no-op methods on a JsonObject, these are inherited, probably
+	// means i have a poor design and need to separate this a bit more
+	public JsonItem setValue(Long value) { return this; }
+	public JsonItem setValue(Double value) { return this; }
+	public JsonItem setValue(String value) { return this; }
+	public JsonItem setValue(Boolean value) { return this; }
+	public JsonItem setValue(Integer value) { return this; }
+	public JsonItem setValue(ArrayList<JsonValue> value) { return this; }
+	public JsonItem setValue(JsonElement value) { return this; }
+	public JsonItem setName(String name) { return this; }
+	public String getName() { return null; }
+
+	public JsonElement getElement() { return this; }
 }

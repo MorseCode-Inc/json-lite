@@ -1,15 +1,14 @@
 package inc.morsecode.json;
 
 
-public abstract class JsonValue {
-	
-	public static final String NULL= "null";
-	
+public abstract class JsonValue implements inc.morsecode.spec.json.JsonElement {
+
 	private Object value;
 	
 	protected JsonValue() { this.value= null; }
 	protected JsonValue(Object value) { this.value= value; }
 	
+	@Override
 	public Object getValue() { return value; }
 	
 	protected void setValue(Object value) { this.value= value; }
@@ -29,5 +28,5 @@ public abstract class JsonValue {
 	private String quoted(String value) {
 		return "\""+ value +"\"";
 	}
-	
+
 }

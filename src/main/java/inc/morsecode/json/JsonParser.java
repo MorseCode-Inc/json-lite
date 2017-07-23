@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import inc.morsecode.json.ex.MalformedJsonException;
+import inc.morsecode.spec.json.JsonElement;
+import inc.morsecode.spec.json.JsonStructure;
 
 public class JsonParser {
 	
@@ -24,11 +26,11 @@ public class JsonParser {
 		this.tokens= getTokens(json, ",:{}[]\"\\");
 	}
 	
-	public static JsonObject parse(File file) throws FileNotFoundException, IOException, MalformedJsonException {
+	public static JsonStructure parse(File file) throws FileNotFoundException, IOException, MalformedJsonException {
 		return parse(new FileInputStream(file), file.length());
 	}
 	
-	public static JsonObject parse(InputStream in, long length) throws IOException, MalformedJsonException {
+	public static JsonStructure parse(InputStream in, long length) throws IOException, MalformedJsonException {
 		
 		StringBuffer buffer= new StringBuffer();
 		
@@ -46,14 +48,14 @@ public class JsonParser {
 	}
 
 	
-	public static JsonObject parse(String data) throws MalformedJsonException {
+	public static JsonStructure parse(String data) throws MalformedJsonException {
 		
 		
 		data= data.trim();
 		
 		if (data.startsWith("{") && data.endsWith("}")) {
 			JsonParser parser= new JsonParser(data);
-			JsonObject obj= parser.parseObject();
+			JsonStructure obj= parser.parseObject();
 			return obj;
 		} else {
 			// System.err.println("Malformed JSON:\n"+ data);
@@ -133,7 +135,7 @@ public class JsonParser {
 		
 	}
 	
-	private JsonObject parseObject() throws MalformedJsonException {
+	private JsonStructure parseObject() throws MalformedJsonException {
 		ParserMode mode= ParserMode.INIT;
 		
 		String token= next();
@@ -292,7 +294,7 @@ public class JsonParser {
 		if (c == '"') { 
 			return new JsonPrimitive(nextString());
 		} else if (c == '{') { 
-			JsonObject value= parseObject();
+			JsonValue value= (JsonValue)parseObject();
 			return value;
 		} else if (c == '[') { 
 			return nextArray();
@@ -318,7 +320,7 @@ public class JsonParser {
 				JsonArray dimension= nextArray();
 				array.add(dimension);
 			} else if ('{' == peek) {
-				array.add(parseObject());
+				array.add((JsonStructure)parseObject());
 			} else if (',' == peek) {
 				next(); // pop the comma off
 			} else {
@@ -377,8 +379,8 @@ public class JsonParser {
 		
 		//String json= "{\"name\" : 3, \"msg\": \"hello world\", \"age\":31}";
 		
-		JsonObject json= new JsonObject();
-		JsonObject address= new JsonObject();
+		JsonStructure json= new JsonObject();
+		JsonStructure address= new JsonObject();
 		JsonArray array= new JsonArray();
 		json.set("name", (Integer)null);
 		json.set("age", 31);
@@ -405,7 +407,7 @@ public class JsonParser {
 		JsonParser p= new JsonParser(jsonString);
 		// JsonParser p= new JsonParser("{\"name\" : \"3\"}");
 		
-		JsonObject o= p.parseObject();
+		JsonStructure o= p.parseObject();
 		
 		System.out.println(o);
 		

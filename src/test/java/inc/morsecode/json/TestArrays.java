@@ -9,8 +9,8 @@ public class TestArrays {
 	
 	@Test
 	public void testLazyLoad() {
-		JsonArray array= new JsonArray();
-		array.add(5);
+		JsonArray<JsonPrimitive> array= new JsonArray();
+		array.add(new JsonPrimitive(5));
 		Assert.assertTrue((Integer)array.get(0).getValue() == 5);
 	}
 	

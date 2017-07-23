@@ -1,102 +1,157 @@
 package inc.morsecode.json;
 
-import java.util.ArrayList;
+import inc.morsecode.spec.json.JsonElement;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
-public class JsonArray extends JsonValue implements Iterable<JsonValue> {
-	
-	public JsonArray() {
-		super(new ArrayList<JsonValue>());
-	}
-	
-	public JsonArray(Collection<JsonValue> array) {
-		this();
-		for (JsonValue value : array) { add(value); }
-	}
+public class JsonArray<T extends JsonElement> implements JsonElement, Iterable<T>, List<T> {
 
-	public JsonArray(int[] array) {
-		this();
-		for (int value : array) { add(value); }
+    private ArrayList<T> array= new ArrayList<T>();
+
+    // default constructor
+    public JsonArray() { }
+
+    // construct from existing Collection of things
+	public JsonArray(Collection<T> array) {
+		for (T value : array) { add(value); }
 	}
 
-	public JsonArray(long[] array) {
-		this();
-		for (long value : array) { add(value); }
+	public JsonArray(T[] array) {
+		for (T value : array) { add(value); }
 	}
 
-	public JsonArray(double[] array) {
-		this();
-		for (double value : array) { add(value); }
+	public Iterator<T> iterator() {
+		return array.iterator();
 	}
 
-	public JsonArray(boolean[] array) {
-		this();
-		for (boolean value : array) { add(value); }
+	@Override
+	public Object getValue() {
+		return array;
 	}
 
-	public JsonArray(String[] array) {
-		this();
-		for (String value : array) { add(value); }
+	@Override
+	public boolean add(T e) {
+		return array.add(e);
 	}
 
-	public Iterator<JsonValue> iterator() {
-		return getArray().iterator();
+	@Override
+	public T remove(int idx) {
+		return array.remove(idx);
 	}
-	
-	@SuppressWarnings("unchecked")
-	public ArrayList<JsonValue> getArray() {
-		return (ArrayList<JsonValue>)getValue();
-	}
-	
-	public void add(JsonValue e) {
-		if (e == null) {
-			e= new JsonValue() {};
-		}
-		getArray().add(e);
-	}
-	
-	public JsonValue remove(int idx) {
-		if (getValue() == null) {
-			setValue(new ArrayList<JsonValue>());
-		}
-		return getArray().remove(idx);
-	}
-	
+
+	@Override
 	public int size() {
-		if (getValue() == null) {
-			setValue(new ArrayList<JsonValue>());
-		}
-		return getArray().size();
+		return array.size();
 	}
-	
+
+	@Override
 	public boolean isEmpty() {
-		if (getValue() == null) {
-			setValue(new ArrayList<JsonValue>());
-		}
-		return getArray().isEmpty();
+		return array.isEmpty();
 	}
 	
 	@Override
 	public String toString() {
 		String str= "";
 		String delim= "";
-		for (JsonValue value : this) {
+		for (T value : this) {
 			str+= "\n\t"+ delim + value;
 			delim= ", ";
 		}
 		return "["+ str +"\n]";
 	}
 
-	public void add(String value) { add(new JsonPrimitive(value)); }
-	public void add(Integer value) { add(new JsonPrimitive(value)); }
-	public void add(Long value) { add(new JsonPrimitive(value)); }
-	public void add(Double value) { add(new JsonPrimitive(value)); }
-	public void add(Boolean value) { add(new JsonPrimitive(value)); }
-
-	public JsonValue get(int i) {
-		return getArray().get(i);
+	@Override
+	public T get(int i) {
+		return array.get(i);
 	}
-	
+
+	@Override
+	public boolean contains(Object o) {
+	    return array.contains(o);
+	}
+
+	@Override
+	public Object[] toArray() {
+		return array.toArray();
+	}
+
+	@Override
+	public <T1> T1[] toArray(T1[] a) {
+		return array.toArray(a);
+	}
+
+	@Override
+	public boolean remove(Object o) {
+	    return array.remove(o);
+	}
+
+	@Override
+	public boolean containsAll(Collection<?> c) {
+	    return array.containsAll(c);
+	}
+
+	@Override
+	public boolean addAll(Collection<? extends T> c) {
+	    return array.addAll((c));
+	}
+
+	@Override
+	public boolean addAll(int index, Collection<? extends T> c) {
+	    return array.addAll(index, c);
+	}
+
+	@Override
+	public boolean removeAll(Collection<?> c) {
+	    return array.removeAll(c);
+	}
+
+	@Override
+	public boolean retainAll(Collection<?> c) {
+	    return array.retainAll(c);
+	}
+
+	@Override
+	public void clear() {
+		array.clear();
+	}
+
+	@Override
+	public T set(int index, T element) {
+		return array.set(index, element);
+	}
+
+	@Override
+	public void add(int index, T element) {
+		array.add(index, element);
+	}
+
+	@Override
+	public int indexOf(Object o) {
+	    return array.indexOf(o);
+	}
+
+	@Override
+	public int lastIndexOf(Object o) {
+	    return array.lastIndexOf(o);
+	}
+
+	@Override
+	public ListIterator<T> listIterator() {
+	    return array.listIterator();
+	}
+
+	@Override
+	public ListIterator<T> listIterator(int index) {
+	    return array.listIterator(index);
+	}
+
+	@Override
+	public List<T> subList(int fromIndex, int toIndex) {
+	    return array.subList(fromIndex, toIndex);
+	}
+
 }

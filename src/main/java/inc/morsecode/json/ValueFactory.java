@@ -1,18 +1,20 @@
 package inc.morsecode.json;
 
+import inc.morsecode.spec.json.JsonElement;
+import inc.morsecode.spec.json.JsonStructure;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Created by morsecode on 7/20/2017.
  */
 public class ValueFactory {
 
-    private Function toObject= new Function<Object, JsonValue>() {
+    private Function toObject= new Function<Object, JsonElement>() {
         @Override
-        public JsonValue apply(Object value) {
+        public JsonElement apply(Object value) {
             if (value == null) { return new JsonPrimitive((String)null); }
             if (value instanceof List) {
                 // array...
@@ -25,7 +27,7 @@ public class ValueFactory {
         }
     };
 
-    public static JsonValue create(final Object value) {
+    public static JsonElement create(final Object value) {
 
         if (value == null) { return new JsonPrimitive((String)null); }
 
@@ -36,7 +38,7 @@ public class ValueFactory {
             Map<String, Object> map = (Map) value;
             //Function<String, >
 
-            final JsonObject retVal= new JsonObject();
+            final JsonStructure retVal= new JsonObject();
 
             map.keySet().stream().forEach(key -> retVal.set(key, create(map.get(key))));
 
