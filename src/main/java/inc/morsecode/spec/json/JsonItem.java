@@ -9,25 +9,25 @@ import java.util.ArrayList;
  */
 public interface JsonItem {
 
-    public String getName();
+    String getName();
 
-    public JsonItem setName(String name);
+    JsonItem setName(String name);
 
-    public Object getValue();
+    Object getValue();
 
-    public JsonItem setValue(JsonElement value);
+    JsonItem setValue(JsonElement value);
 
-    public JsonItem setValue(String value);
+    JsonItem setValue(String value);
 
-    public JsonItem setValue(Integer value);
+    JsonItem setValue(Integer value);
 
-    public JsonItem setValue(Long value);
+    JsonItem setValue(Long value);
 
-    public JsonItem setValue(Double value);
+    JsonItem setValue(Double value);
 
-    public JsonItem setValue(Boolean value);
+    JsonItem setValue(Boolean value);
 
-    public JsonItem setValue(ArrayList<JsonValue> value);
+    JsonItem setValue(ArrayList<JsonValue> value);
 
-    public JsonElement getElement();
+    JsonElement getElement();
 }

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class JsonObject implements JsonElement, JsonStructure {
 
-	private HashMap<String, JsonItem> data= new HashMap<String, JsonItem>();
+	private Map<String, JsonItem> data= new HashMap<String, JsonItem>();
 
 	@Override
 	public Object getValue() { return this; }

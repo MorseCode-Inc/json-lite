@@ -1,18 +1,20 @@
 package inc.morsecode.json;
 
+import inc.morsecode.spec.json.JsonElement;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class VariableTypedJsonArray extends JsonValue implements Iterable<JsonValue> {
+public class VariableTypedJsonArray extends JsonValue implements Iterable<JsonElement> {
 
 	public VariableTypedJsonArray() {
-		super(new ArrayList<JsonValue>());
+		super(new ArrayList<JsonElement>());
 	}
 
-	public VariableTypedJsonArray(Collection<JsonValue> array) {
+	public VariableTypedJsonArray(Collection<JsonElement> array) {
 		this();
-		for (JsonValue value : array) { add(value); }
+		for (JsonElement value : array) { add(value); }
 	}
 
 	public VariableTypedJsonArray(int[] array) {
@@ -40,23 +42,23 @@ public class VariableTypedJsonArray extends JsonValue implements Iterable<JsonVa
 		for (String value : array) { add(value); }
 	}
 
-	public Iterator<JsonValue> iterator() {
+	public Iterator<JsonElement> iterator() {
 		return getArray().iterator();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<JsonValue> getArray() {
-		return (ArrayList<JsonValue>)getValue();
+	public ArrayList<JsonElement> getArray() {
+		return (ArrayList<JsonElement>)getValue();
 	}
 	
-	public void add(JsonValue e) {
+	public void add(JsonElement e) {
 		if (e == null) {
 			e= new JsonValue() {};
 		}
 		getArray().add(e);
 	}
 	
-	public JsonValue remove(int idx) {
+	public JsonElement remove(int idx) {
 		if (getValue() == null) {
 			setValue(new ArrayList<JsonValue>());
 		}
@@ -81,7 +83,7 @@ public class VariableTypedJsonArray extends JsonValue implements Iterable<JsonVa
 	public String toString() {
 		String str= "";
 		String delim= "";
-		for (JsonValue value : this) {
+		for (JsonElement value : this) {
 			str+= "\n\t"+ delim + value;
 			delim= ", ";
 		}
@@ -94,7 +96,7 @@ public class VariableTypedJsonArray extends JsonValue implements Iterable<JsonVa
 	public void add(Double value) { add(new JsonPrimitive(value)); }
 	public void add(Boolean value) { add(new JsonPrimitive(value)); }
 
-	public JsonValue get(int i) {
+	public JsonElement get(int i) {
 		return getArray().get(i);
 	}
 	

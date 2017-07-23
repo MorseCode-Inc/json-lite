@@ -1,5 +1,6 @@
 package inc.morsecode.json;
 
+import inc.morsecode.spec.json.JsonElement;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -59,7 +60,7 @@ public class TestArrays {
 		}
 		
 		int i= 0;
-		for (JsonValue value : array) {
+		for (JsonElement value : array) {
 			Assert.assertEquals(i++, ((Integer)value.getValue()).intValue());
 		}
 	}
@@ -72,7 +73,7 @@ public class TestArrays {
 			array.add(i);
 		}
 		
-		JsonValue value= array.remove(3);
+		JsonElement value= array.remove(3);
 		
 		Assert.assertEquals(13, ((Integer)value.getValue()).intValue());
 
