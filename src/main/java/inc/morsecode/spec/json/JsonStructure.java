@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by morsecode on 7/23/2017.
  */
-public interface JsonStructure extends JsonElement, JsonItem {
+public interface JsonStructure extends JsonElement, JsonNamedValue {
     JsonStructure set(String name, String value);
 
     JsonStructure set(String name, Integer value);
@@ -27,7 +27,7 @@ public interface JsonStructure extends JsonElement, JsonItem {
 
     JsonStructure set(String name, JsonElement value);
 
-    JsonStructure set(JsonItem member);
+    JsonStructure set(JsonNamedValue member);
 
     String get(String name);
 
@@ -53,7 +53,7 @@ public interface JsonStructure extends JsonElement, JsonItem {
 
     Collection<String> keys();
 
-    Map<String, JsonItem> getData();
+    Map<String, JsonNamedValue> getData();
 
     JsonStructure set(String key, Map<String, Object> map);
 

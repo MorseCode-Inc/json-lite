@@ -1,12 +1,12 @@
 package inc.morsecode.json;
 
 import inc.morsecode.spec.json.JsonElement;
-import inc.morsecode.spec.json.JsonItem;
+import inc.morsecode.spec.json.JsonNamedValue;
 
 import java.util.ArrayList;
 
 
-public class JsonMember implements inc.morsecode.spec.json.JsonItem {
+public class JsonMember implements JsonNamedValue {
 	
 	private String name;
 	private JsonElement value;
@@ -30,7 +30,7 @@ public class JsonMember implements inc.morsecode.spec.json.JsonItem {
 	@Override
 	public String getName() { return name; }
 	@Override
-	public JsonItem setName(String name) { this.name = name; return this; }
+	public JsonNamedValue setName(String name) { this.name = name; return this; }
 	
 	@Override
 	public Object getValue() {
@@ -39,19 +39,19 @@ public class JsonMember implements inc.morsecode.spec.json.JsonItem {
 	}
 	
 	@Override
-	public JsonItem setValue(JsonElement value) { this.value= value; return this; }
+	public JsonNamedValue setValue(JsonElement value) { this.value= value; return this; }
 	@Override
-	public JsonItem setValue(String value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonNamedValue setValue(String value) { this.value= new JsonPrimitive(value); return this; }
 	@Override
-	public JsonItem setValue(Integer value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonNamedValue setValue(Integer value) { this.value= new JsonPrimitive(value); return this; }
 	@Override
-	public JsonItem setValue(Long value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonNamedValue setValue(Long value) { this.value= new JsonPrimitive(value); return this; }
 	@Override
-	public JsonItem setValue(Double value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonNamedValue setValue(Double value) { this.value= new JsonPrimitive(value); return this; }
 	@Override
-	public JsonItem setValue(Boolean value) { this.value= new JsonPrimitive(value); return this; }
+	public JsonNamedValue setValue(Boolean value) { this.value= new JsonPrimitive(value); return this; }
 	@Override
-	public JsonItem setValue(ArrayList<JsonValue> value) { this.value= new TypedJsonArray(value); return this; }
+	public JsonNamedValue setValue(ArrayList<JsonValue> value) { this.value= new TypedJsonArray(value); return this; }
 
 	@Override
 	public String toString() {

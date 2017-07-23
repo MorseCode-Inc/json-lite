@@ -9,14 +9,14 @@ public class TestArrays {
 	
 	@Test
 	public void testLazyLoad() {
-		VariableTypedJsonArray array= new VariableTypedJsonArray();
+		JsonArray array= new JsonArray();
 		array.add(5);
 		Assert.assertTrue((Integer)array.get(0).getValue() == 5);
 	}
 	
 	@Test
 	public void testEmpty() {
-		VariableTypedJsonArray array= new VariableTypedJsonArray();
+		JsonArray array= new JsonArray();
 		Assert.assertTrue(array.isEmpty());
 		
 		array.add(System.currentTimeMillis());
@@ -30,7 +30,7 @@ public class TestArrays {
 
 	@Test
 	public void testArray() {
-		VariableTypedJsonArray array= new VariableTypedJsonArray();
+		JsonArray array= new JsonArray();
 
 		long ts= System.currentTimeMillis();
 		
@@ -53,7 +53,7 @@ public class TestArrays {
 
 	@Test
 	public void testIterator() {
-		VariableTypedJsonArray array= new VariableTypedJsonArray();
+		JsonArray array= new JsonArray();
 
 		for (int i= 0; i < 5; i++) {
 			array.add(i);
@@ -67,7 +67,7 @@ public class TestArrays {
 	
 	@Test
 	public void testRemove() {
-		VariableTypedJsonArray array= new VariableTypedJsonArray();
+		JsonArray array= new JsonArray();
 
 		for (int i= 10; i < 15; i++) {
 			array.add(i);

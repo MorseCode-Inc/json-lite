@@ -2,14 +2,14 @@ package inc.morsecode.json;
 
 
 import inc.morsecode.spec.json.JsonElement;
-import inc.morsecode.spec.json.JsonItem;
+import inc.morsecode.spec.json.JsonNamedValue;
 import inc.morsecode.spec.json.JsonStructure;
 
 import java.util.*;
 
 public class JsonObject implements JsonElement, JsonStructure {
 
-	private Map<String, JsonItem> data= new HashMap<String, JsonItem>();
+	private Map<String, JsonNamedValue> data= new HashMap<String, JsonNamedValue>();
 
 	@Override
 	public Object getValue() { return this; }
@@ -35,8 +35,13 @@ public class JsonObject implements JsonElement, JsonStructure {
 	public JsonStructure set(String name, JsonElement value) { set(new JsonMember(name, value)); return this; }
 	
 	@Override
-	public JsonStructure set(JsonItem member) {
+	public JsonStructure set(JsonNamedValue member) {
 		data.put(member.getName(), member);
+		return this;
+	}
+
+	public JsonStructure setNull(String key) {
+		data.put(key, new JsonMember(key, ValueFactory.createNull()));
 		return this;
 	}
 	
@@ -160,7 +165,7 @@ public class JsonObject implements JsonElement, JsonStructure {
 	
 	@Override
 	public Object get(String name, Object ifNull) {
-		JsonItem member= data.get(name);
+		JsonNamedValue member= data.get(name);
 		if (member == null) { return ifNull; }
 		
 		Object value= member.getValue();
@@ -215,7 +220,7 @@ public class JsonObject implements JsonElement, JsonStructure {
 	@Override
 	public TypedJsonArray get(String key, TypedJsonArray ifNull) {
 		
-		JsonItem member= data.get(key);
+		JsonNamedValue member= data.get(key);
 		
 		if (member == null) { 
 			return ifNull;
@@ -235,7 +240,7 @@ public class JsonObject implements JsonElement, JsonStructure {
 		StringBuffer buff= new StringBuffer("{");
 
 		String comma= "";
-	    for (JsonItem value : data.values()) {
+	    for (JsonNamedValue value : data.values()) {
 	    	buff.append(comma).append(value.toString());
 	    	comma= ",";
 		}
@@ -251,7 +256,7 @@ public class JsonObject implements JsonElement, JsonStructure {
 	}
 
 	@Override
-	public Map<String, JsonItem> getData() {
+	public Map<String, JsonNamedValue> getData() {
 		return Collections.unmodifiableMap(data);
 	}
 
@@ -270,14 +275,14 @@ public class JsonObject implements JsonElement, JsonStructure {
 
 	// no-op methods on a JsonObject, these are inherited, probably
 	// means i have a poor design and need to separate this a bit more
-	public JsonItem setValue(Long value) { return this; }
-	public JsonItem setValue(Double value) { return this; }
-	public JsonItem setValue(String value) { return this; }
-	public JsonItem setValue(Boolean value) { return this; }
-	public JsonItem setValue(Integer value) { return this; }
-	public JsonItem setValue(ArrayList<JsonValue> value) { return this; }
-	public JsonItem setValue(JsonElement value) { return this; }
-	public JsonItem setName(String name) { return this; }
+	public JsonNamedValue setValue(Long value) { return this; }
+	public JsonNamedValue setValue(Double value) { return this; }
+	public JsonNamedValue setValue(String value) { return this; }
+	public JsonNamedValue setValue(Boolean value) { return this; }
+	public JsonNamedValue setValue(Integer value) { return this; }
+	public JsonNamedValue setValue(ArrayList<JsonValue> value) { return this; }
+	public JsonNamedValue setValue(JsonElement value) { return this; }
+	public JsonNamedValue setName(String name) { return this; }
 	public String getName() { return null; }
 
 	public JsonElement getElement() { return this; }

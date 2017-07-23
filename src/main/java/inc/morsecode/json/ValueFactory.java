@@ -27,9 +27,13 @@ public class ValueFactory {
         }
     };
 
+    public static JsonElement createNull() {
+        return new JsonPrimitive((String)null);
+    }
+
     public static JsonElement create(final Object value) {
 
-        if (value == null) { return new JsonPrimitive((String)null); }
+        if (value == null) { return createNull(); }
 
         if (value instanceof List) {
             // array...

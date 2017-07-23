@@ -304,8 +304,8 @@ public class JsonParser {
 	}
 	
 	
-	private VariableTypedJsonArray nextArray() throws MalformedJsonException {
-		VariableTypedJsonArray array= new VariableTypedJsonArray();
+	private JsonArray nextArray() throws MalformedJsonException {
+		JsonArray array= new JsonArray();
 		if (!"[".equals(next())) {
 			throw new MalformedJsonException("Expecting array value, missing [");	// pop beginning bracket
 		}
@@ -316,7 +316,7 @@ public class JsonParser {
 			
 			if ('[' == peek) {
 				// multi-dimensional array
-				VariableTypedJsonArray dimension= nextArray();
+				JsonArray dimension= nextArray();
 				array.add(dimension);
 			} else if ('{' == peek) {
 				array.add((JsonStructure)parseObject());
@@ -380,7 +380,7 @@ public class JsonParser {
 		
 		JsonStructure json= new JsonObject();
 		JsonStructure address= new JsonObject();
-		VariableTypedJsonArray array= new VariableTypedJsonArray();
+		JsonArray array= new JsonArray();
 		json.set("name", (Integer)null);
 		json.set("age", 31);
 		address.set("street", "123 Main St.");
