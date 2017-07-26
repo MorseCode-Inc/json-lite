@@ -1,16 +1,22 @@
 package inc.morsecode.json;
 
 import inc.morsecode.spec.json.JsonElement;
+import inc.morsecode.spec.json.JsonStructure;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class JsonArray extends JsonValue implements Iterable<JsonElement>, List<JsonElement> {
-
 
 	private ArrayList<JsonElement> array;
 
 	public JsonArray() {
+	    // the parent class (JsonValue) will hold a reference to
+		// the array of JsonElements
 		super(new ArrayList<JsonElement>());
+
+		// now grab a properly typed reference from
+		// our parent class
 		this.array= (ArrayList<JsonElement>) this.getValue();
 	}
 
@@ -48,9 +54,9 @@ public class JsonArray extends JsonValue implements Iterable<JsonElement>, List<
 		return array.iterator();
 	}
 	
-	public ArrayList<JsonElement> getArray() {
-		return this.array;
-	}
+	// public ArrayList<JsonElement> getArray() {
+	//     return this.array;
+	// }
 
 	public boolean add(JsonElement e) {
 		if (e == null) {
@@ -186,6 +192,20 @@ public class JsonArray extends JsonValue implements Iterable<JsonElement>, List<
 	@Override
 	public List<JsonElement> subList(int fromIndex, int toIndex) {
 		return array.subList(fromIndex, toIndex);
+	}
+
+	public Object[] asPrimitive() {
+		return (array.stream()
+					 .map(e -> {
+						if (e instanceof JsonStructure) {
+							return ((JsonStructure) e).asMap();
+						} else if (e instanceof JsonArray) {
+							// todo: need to make the json objects do this...
+                            return ((JsonArray) e).asPrimitive();
+						}
+						return e.getValue();
+					})
+					.collect(Collectors.toList()).toArray(new Object[]{}));
 	}
 
 }

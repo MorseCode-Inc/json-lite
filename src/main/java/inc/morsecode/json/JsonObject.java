@@ -6,6 +6,8 @@ import inc.morsecode.spec.json.JsonNamedValue;
 import inc.morsecode.spec.json.JsonStructure;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class JsonObject implements JsonElement, JsonStructure {
 
@@ -35,7 +37,7 @@ public class JsonObject implements JsonElement, JsonStructure {
 	public JsonStructure set(String name, JsonElement value) { set(new JsonMember(name, value)); return this; }
 	
 	@Override
-	public JsonStructure set(JsonNamedValue member) {
+	public JsonStructure set(final JsonNamedValue member) {
 		data.put(member.getName(), member);
 		return this;
 	}
@@ -286,4 +288,24 @@ public class JsonObject implements JsonElement, JsonStructure {
 	public String getName() { return null; }
 
 	public JsonElement getElement() { return this; }
+
+	public Map<String, Object> asMap() {
+
+		return data.entrySet()
+				.stream().collect(Collectors.toMap(
+						o -> o.getKey(),
+						t -> {
+							if (t.getValue() instanceof JsonStructure) {
+								return ((JsonStructure)t.getValue().getValue()).asMap();
+							} else if (t.getValue() instanceof JsonArray) {
+							    // todo: needs a bit more work to return
+								// the right thing in the case of an array
+								return ((JsonArray) t.getValue()).asPrimitive();
+							}
+
+							return t.getValue().getValue();
+						}
+				))
+				;
+	}
 }

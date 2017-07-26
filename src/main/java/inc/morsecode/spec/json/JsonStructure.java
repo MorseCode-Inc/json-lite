@@ -54,9 +54,11 @@ public interface JsonStructure extends JsonElement, JsonNamedValue {
     Collection<String> keys();
 
     Map<String, JsonNamedValue> getData();
+    Map<String, Object> asMap();
 
     JsonStructure set(String key, Map<String, Object> map);
 
     JsonStructure merge(Map<String, Object> map);
+
 
 }
