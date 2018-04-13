@@ -1,12 +1,11 @@
 package inc.morsecode.json;
 
 
-import inc.morsecode.spec.json.JsonElement;
 import inc.morsecode.spec.json.JsonNamedValue;
+import inc.morsecode.spec.json.JsonElement;
 import inc.morsecode.spec.json.JsonStructure;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class JsonObject implements JsonElement, JsonStructure {

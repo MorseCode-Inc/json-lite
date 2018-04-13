@@ -1,7 +1,9 @@
 package inc.morsecode.json;
 
 
-public abstract class JsonValue implements inc.morsecode.spec.json.JsonElement {
+import inc.morsecode.spec.json.JsonElement;
+
+public abstract class JsonValue implements JsonElement {
 
 	private Object value;
 	
